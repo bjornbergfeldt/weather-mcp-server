@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -28,7 +28,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-      
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -51,13 +51,13 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0E0B89CA23D44E709C6AEB401EBB7620 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_BC6CA49B19EC4523A21D7D378A318F60 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_912693A60F6A4CEEBBDC6EC2A510E5C1 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B4A7491CB2194C92BC1CFCB044263B51 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_07E4DC5D9AB94A0BA3741B3035C8FD36 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_836E7BD75DF1450F8D43705F152FB48B }}
 
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'custommcp'
           slot-name: 'Production'
